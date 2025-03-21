@@ -1,0 +1,63 @@
+
+  /* Search box */
+  .searchBox {
+    background: #bedbeb;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
+    position: relative;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  .searchButton {
+    color: #fdfdfd;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    background: #52cf4e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    border:0;
+  }
+  
+  .searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    width: 100%;
+    padding-left: 15px;
+  }
+
+
+  
+  @media screen and (max-width: 991px) {
+    .searchBox{
+      width: 200px;
+    }
+  }
+  
+ 
+  /* Add this CSS to your custom stylesheet or component */
+  .customDropdown:hover .dropdown-menu {
+    display: block !important; /* Set the dropdown menu to be visible on hover */
+    opacity: 1; /* Make the dropdown menu fully visible */
+    visibility: visible; /* Ensure the dropdown menu is visible */
+    transition: opacity 0.3s ease-in-out;
+  }

@@ -1,0 +1,8 @@
+.cardDesign {
+    padding: 15px 15px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.07);
+    min-height: 400px;
+    border-radius: 20px;
+  }

@@ -1,0 +1,40 @@
+.logo{
+    padding: 15px 0;
+}
+
+.logo a{
+    text-decoration: none;
+}
+.logo img{
+    height: 62px;
+    width: 266px;
+    object-fit: cover;
+}
+.name{
+    font-size: 35px;
+    font-weight: 700;
+    margin-left: 15px;
+    font-family: 'Kalpurush', sans-serif;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .logo{
+        padding: 10px 0;
+    }
+    .logo img{
+        height: 55px;
+        width: 266px;
+        object-fit: cover;
+    }
+    .name{
+        font-size: 20px;
+    }
+    .search {
+        display: none !important;
+      }
+      .textA {
+        display: none !important;
+      }
+     
+  }

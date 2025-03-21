@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Poppins:ital,wght@0,300;0,400;0,700;1,300&display=swap");
+
+@font-face {
+  font-family: "Kalpurush";
+  src: url("/fonts/Kalpurush.ttf") format("truetype"); /* Update the path and format accordingly */
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Kalpurush", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: "Kalpurush", sans-serif;
+  /* font-family: 'Noto Sans Bengali', sans-serif; */
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.border {
+  border: 1px solid red;
+}
+/* Container */
+.container {
+  min-width: 95%;
+}
+
+/*** Section Title ***/
+.section-title {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.headerTitle {
+  width: 100%;
+  height: 5vh;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+}
+.headerTitle .headerTitleMain {
+  position: relative;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: "Kalpurush", sans-serif;
+}
+.headerTitle .headerTitleMain {
+  background-image: repeating-radial-gradient(
+    closest-side at 20px 20px,
+    #553c9a,
+    #ee4b2b,
+    #553c9a
+  );
+}
+
+/* Loading Image */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadingGif {
+  width: 60%;
+  height: 60vh;
+}
+
+/* Text field remove outline and box-shadow */
+.form-control {
+  box-shadow: none;
+  outline: none;
+}

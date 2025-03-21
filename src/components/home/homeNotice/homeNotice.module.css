@@ -1,0 +1,45 @@
+.cardDesign {
+  padding: 15px 15px;
+  text-align: center;
+  margin-bottom: 40px;
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.07);
+  min-height: 400px;
+  border-radius: 20px;
+}
+.cardImg {
+  max-height: 210px;
+  width: 100%;
+}
+.date {
+  text-align: left;
+  padding: 10px 0;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  font-family: "Noto Sans Bengali", sans-serif;
+}
+.button {
+  width: 140px;
+  height: 32px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #002147;
+  border: 2px solid #009cff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button:hover {
+  background-color: #009cff;
+  color: #ffffff !important;
+  border: 2px solid #009cff;
+  transition: 0.3s;
+}

@@ -1,0 +1,14 @@
+.button{
+    color: black;
+    background: #5986f9;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 1px solid #D8DADF;
+}
+.page{
+    margin-bottom: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+

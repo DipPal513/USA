@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "SolaimanLipi";
+  src: url("/fonts/SolaimanLipi.ttf") format("truetype"); /* Update the path and format accordingly */
+  font-weight: normal;
+  font-style: normal;
+}

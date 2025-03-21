@@ -1,0 +1,62 @@
+.navbar {
+  background: #009cff;
+}
+.nav{
+  padding: 12px 0;
+}
+.menuBrand{
+  color: #fff;
+  font-family: 'SolaimanLipi', sans-serif;
+}
+@media (min-width: 992px) {
+  .menuBrand{
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .menu {
+      display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+
+  .search {
+      display: none !important;
+    }
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  margin-right: 18px;
+  color: #ffffff;
+  padding: 3px 0;
+  font-weight: 500;
+  outline: none;
+  /* font-family: 'Noto Sans Bengali', sans-serif; */
+  font-family: 'Kalpurush', sans-serif;
+}
+.navbar a.active{
+  color: black;
+}
+.navbar a:hover{
+  color: black;
+}
+
+.dropdown-menu{
+  padding: 0;
+}
+.dropdownItem{
+  background-color: #f8f8f8;
+}
+.dropdownItem a{
+  color: black;
+}
+/* Add this CSS to your custom stylesheet or component */
+.customDropdown:hover .dropdown-menu {
+  display: block !important; /* Set the dropdown menu to be visible on hover */
+}
