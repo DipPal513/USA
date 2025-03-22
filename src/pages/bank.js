@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row } from "react-bootstrap";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import { TITLE } from "@/utils/api";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Bank() {
   const { data, loading } = useFetch("/bank");
@@ -21,7 +21,7 @@ export default function Bank() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">ব্যাংক একাউন্ট</h3>
+              <h3 className="headerTitleMain">ব্যাংক একাউন্ট</h3>
             </div>
             {/* Alumni Details */}
             <Container className="mt-4 mb-5">

@@ -1,9 +1,9 @@
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
-import { Container, Row } from "react-bootstrap";
 import CardDesign from "@/components/cardDesign/CardDesign";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import { TITLE } from "@/utils/api";
+import Head from "next/head";
+import { Container, Row } from "react-bootstrap";
 
 export default function Advisor() {
   const { data, loading } = useFetch("/member/Executive");
@@ -21,7 +21,7 @@ export default function Advisor() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">কার্যনির্বাহী কমিটি</h3>
+              <h3 className="headerTitleMain">কার্যনির্বাহী কমিটি</h3>
             </div>
             {/* Alumni Details */}
             <Container className="mt-4">

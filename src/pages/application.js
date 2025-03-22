@@ -1,12 +1,10 @@
+import Style from "@/styles/Application.module.css";
+import axios from "axios";
 import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Style from "@/styles/Application.module.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { BASE_URL } from "@/utils/api";
 import Swal from "sweetalert2";
 
 export default function Application() {
@@ -33,7 +31,7 @@ export default function Application() {
   } = useForm();
 
 
- 
+
 
   // Get All University Name
   useEffect(() => {
@@ -71,7 +69,7 @@ export default function Application() {
   };
 
   const onSubmit = async (data) => {
-   
+
     try {
       setLoadingBtn(true);
       data.bloodGroup = bloodGroup;
@@ -192,7 +190,7 @@ export default function Application() {
               <Col lg={8} md={10} sm={12} className="mx-auto">
                 <div className={Style.application}>
                   <div className="headerTitle mb-3">
-                    <h3 class="headerTitleMain">সদস্য আবেদন ফরম</h3>
+                    <h3 className="headerTitleMain">সদস্য আবেদন ফরম</h3>
                   </div>
                   <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row>

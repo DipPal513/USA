@@ -7,6 +7,7 @@ import { BsFacebook } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import SearchModal from "@/components/quickViewModal/searchModal/SearchModal";
+import Link from "next/link";
 
 const SearchCard = ({ item }) => {
 //   console.log(item);
@@ -34,17 +35,17 @@ const SearchCard = ({ item }) => {
 
         <div className={Style.icons}>
           <div className={Style.icon}>
-            <a href="https://www.facebook.com/">
+            <Link href="https://www.facebook.com/" target="_blank">
               <BsFacebook />
-            </a>
+            </Link>
           </div>
           <div className={Style.icon} onClick={() => setModalShow(true)}>
             <BsFillEyeFill />
           </div>
           <div className={Style.icon}>
-            <a href="https://www.instagram.com/">
+            <Link href="https://www.instagram.com/" target="_blank">
               <BsInstagram />
-            </a>
+            </Link>
           </div>
         </div>
 

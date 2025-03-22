@@ -1,8 +1,8 @@
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row } from "react-bootstrap";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import { TITLE } from "@/utils/api";
+import Head from "next/head";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Advisor() {
   const { data, loading } = useFetch("/history");
@@ -20,7 +20,7 @@ export default function Advisor() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">সংগঠনটির ইতিহাস</h3>
+              <h3 className="headerTitleMain">সংগঠনটির ইতিহাস</h3>
             </div>
             {/* History Details */}
             <Container className="mb-5">

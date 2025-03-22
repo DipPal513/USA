@@ -1,11 +1,11 @@
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
 import CardDesign from "@/components/cardDesign/CardDesign";
-import { Container, Row } from "react-bootstrap";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
-import { TITLE } from "@/utils/api";
 import Pagination from "@/components/pagination/Pagination";
+import useFetch from "@/hooks/useFetch";
+import { TITLE } from "@/utils/api";
+import Head from "next/head";
 import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
 
 export default function Senior() {
   const [page, setPage] = useState(1);
@@ -41,7 +41,7 @@ export default function Senior() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">সম্মানিত সদস্য</h3>
+              <h3 className="headerTitleMain">সম্মানিত সদস্য</h3>
             </div>
             {/* Advisor Details */}
             <Container className="mt-4">

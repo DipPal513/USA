@@ -1,13 +1,13 @@
 import Head from "next/head";
 
 import useFetch from "@/hooks/useFetch";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import Style from "../styles/Registration.module.css";
-import { useForm } from "react-hook-form";
+import { BASE_URL } from "@/utils/api";
 import axios from "axios";
 import { useState } from "react";
-import { BASE_URL } from "@/utils/api";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Style from "../styles/Registration.module.css";
 
 export default function Advisor() {
   const [isValid, setIsValid] = useState(true);
@@ -54,8 +54,8 @@ export default function Advisor() {
         <>
           {/* Registration Title */}
           <div className="headerTitle mt-3">
-            <h3 class="headerTitleMain">EXHIBITORS DETAILS</h3>
-            <h3 class="headerTitleMain">TOURISM FAIR REGISTRATION FROM</h3>
+            <h3 className="headerTitleMain">EXHIBITORS DETAILS</h3>
+            <h3 className="headerTitleMain">TOURISM FAIR REGISTRATION FROM</h3>
           </div>
           {/* Registration Details */}
           <Container className="mt-4 mb-5">

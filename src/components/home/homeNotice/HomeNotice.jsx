@@ -1,15 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { Button, Col, Container } from "react-bootstrap";
+import Img from "@/components/lazyLoadImage/Img";
 import { baseImgUrl } from "@/utils/imgUrl";
 import Link from "next/link";
+import { Container } from "react-bootstrap";
 import { MdDateRange } from "react-icons/md";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Style from "./homeNotice.module.css";
-import Img from "@/components/lazyLoadImage/Img";
 
 const HomeNotice = ({ noticeData }) => {
   //   Convert Date
@@ -25,7 +24,7 @@ const HomeNotice = ({ noticeData }) => {
     <div>
       {/* Notice Title */}
       <div className="headerTitle" style={{ height: "3vh" }}>
-        <h3 class="headerTitleMain">নোটিশ</h3>
+        <h3 className="headerTitleMain">নোটিশ</h3>
       </div>
       <Container>
         <Swiper

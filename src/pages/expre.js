@@ -1,11 +1,11 @@
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row, Table } from "react-bootstrap";
-import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
-import { TITLE } from "@/utils/api";
 import Img from "@/components/lazyLoadImage/Img";
-import { baseImgUrl } from "@/utils/imgUrl";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import Style from "@/styles/expre.module.css";
+import { TITLE } from "@/utils/api";
+import { baseImgUrl } from "@/utils/imgUrl";
+import Head from "next/head";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Home() {
   const { data, loading } = useFetch("/expre");
@@ -28,7 +28,7 @@ export default function Home() {
             <Container className="mt-4">
               <Row>
                 <div className="headerTitle">
-                  <h3 class="headerTitleMain"> সভাপতি ও সাধারণ সম্পাদকের তালিকা </h3>
+                  <h3 className="headerTitleMain"> সভাপতি ও সাধারণ সম্পাদকের তালিকা </h3>
                 </div>
 
                 {data?.data?.map((item) => (

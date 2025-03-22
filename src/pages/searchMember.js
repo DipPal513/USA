@@ -33,7 +33,7 @@ const SearchResults = () => {
           <>
             {/* General Member Title */}
             <div className="headerTitle my-3">
-              <h3 class="headerTitleMain">Search Member</h3>
+              <h3 className="headerTitleMain">Search Member</h3>
             </div>
             {/* General Member Details */}
             <Container className="">

@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row } from "react-bootstrap";
-import Style from "@/styles/gallery.module.css";
-import Img from "@/components/lazyLoadImage/Img";
-import { useState } from "react";
-import { TITLE } from "@/utils/api";
-import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
-import { baseImgUrl } from "@/utils/imgUrl";
 import GalleryViewModal from "@/components/galleryViewModal/GalleryViewModal";
+import Img from "@/components/lazyLoadImage/Img";
+import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
+import Style from "@/styles/gallery.module.css";
+import { TITLE } from "@/utils/api";
+import { baseImgUrl } from "@/utils/imgUrl";
+import Head from "next/head";
+import { useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Gallery() {
   const [modalShow, setModalShow] = useState(false);
@@ -32,7 +32,7 @@ export default function Gallery() {
           <>
             {/* Gallery Title */}
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">ফটো গ্যালারি</h3>
+              <h3 className="headerTitleMain">ফটো গ্যালারি</h3>
             </div>
             {/* Gallery Details */}
             <Container className="mt-2 mb-3">

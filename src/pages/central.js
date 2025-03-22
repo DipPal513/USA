@@ -1,11 +1,12 @@
 import Head from "next/head";
 
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row } from "react-bootstrap";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import { TITLE } from "@/utils/api";
-import Table from "react-bootstrap/Table";
 import { baseImgUrl } from "@/utils/imgUrl";
+import { Col, Container, Row } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import Link from "next/link";
 
 export default function Bank() {
   const { data, loading } = useFetch("/committee_view/1");
@@ -23,7 +24,7 @@ export default function Bank() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">কেন্দ্রীয় কমিটি</h3>
+              <h3 className="headerTitleMain">কেন্দ্রীয় কমিটি</h3>
             </div>
             {/* Alumni Details */}
             <Container className="mt-4 mb-5">
@@ -43,7 +44,7 @@ export default function Bank() {
                           <td>{item?.text4}</td>
                           <td>{item?.title}</td>
                           <td>
-                            <a href={baseImgUrl + item?.image}>বিস্তারিত</a>
+                            <Link href={baseImgUrl + item?.image}>বিস্তারিত</Link>
                           </td>
                         </tr>
                       ))}

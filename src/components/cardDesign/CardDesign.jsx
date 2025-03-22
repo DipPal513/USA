@@ -7,6 +7,7 @@ import { BsFacebook } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import QuickViewModal from "../quickViewModal/QuickViewModal";
+import Link from "next/link";
 
 const CardDesign = ({ item }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -26,17 +27,17 @@ const CardDesign = ({ item }) => {
 
         <div className={Style.icons}>
           <div className={Style.icon}>
-            <a href={item?.fb_link}>
+            <Link href={item?.fb_link || "#"}>
               <BsFacebook />
-            </a>
+            </Link>
           </div>
           <div className={Style.icon} onClick={() => setModalShow(true)}>
             <BsFillEyeFill />
           </div>
           <div className={Style.icon}>
-            <a href="https://www.instagram.com/">
+            <Link href="https://www.instagram.com/">
               <BsInstagram />
-            </a>
+            </Link>
           </div>
         </div>
 

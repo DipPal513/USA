@@ -73,7 +73,7 @@ const Footer = () => {
                     className={`${Style.footerItem} d-flex align-items-center p-0 mb-2`}
                   >
                     <BsArrowRightCircleFill className={Style.footerIcon} />
-                    <a style={{textDecoration: "none", color: "#777"}} href="https://laravel.amaderthikana.com/admin/login"  target="_blank">Login</a>
+                    <Link style={{textDecoration: "none", color: "#777"}} href="https://laravel.amaderthikana.com/admin/login"  target="_blank">Login</Link>
                   </li>
               </ul>
             </div>
@@ -86,31 +86,31 @@ const Footer = () => {
                 <BsTwitter />
               </div>
 
-              <a href={data?.admin.fb_link}  target="_blank">
+              <Link href={data?.admin.fb_link || "#"}  target="_blank">
               <div  className={Style.footerSocialIcon}>
                 <BsFacebook /> 
                
               </div>
-              </a>
-                <a href={data?.admin.youtube_link}  target="_blank">
+              </Link>
+                <Link href={data?.admin.youtube_link || "#"}  target="_blank">
               <div  className={Style.footerSocialIcon}>
                 <BsYoutube />
 
               </div>
-                </a>
-                <a href={data?.admin.other_link}  target="_blank">
+                </Link>
+                <Link href={data?.admin.other_link || "#"}  target="_blank">
               <div  className={Style.footerSocialIcon}>
                 <BsLinkedin />
 
               </div>
-                </a>
+                </Link>
             </div>
           </Col>
           <Col lg={3} md={6} sm={6}>
             <h4 className={Style.title}>Developed By</h4>
-            <a href="http://ancovabd.com/" target="_blank">
+            <Link href="http://ancovabd.com/" target="_blank">
               <img src="./ancovabr1.png" alt="" className={Style.ancovaLogo} />
-            </a>
+            </Link>
              
               <h4 className={Style.help}> সহযোগিতায়  </h4>
               <h5 className={Style.title} > কার্যনির্বাহী কমিটি  ২০২৩-২৪ </h5>

@@ -1,11 +1,10 @@
 import Head from "next/head";
 
-import useFetch from "@/hooks/useFetch";
-import { Col, Container, Row } from "react-bootstrap";
 import LoadingSpinner from "@/components/loadingSpinner/LoadingSpinner";
+import useFetch from "@/hooks/useFetch";
 import { TITLE } from "@/utils/api";
+import { Col, Container, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { baseImgUrl } from "@/utils/imgUrl";
 
 export default function Bank() {
   const { data, loading } = useFetch("/executive_view");
@@ -23,7 +22,7 @@ export default function Bank() {
         ) : (
           <>
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">কেন্দ্রীয় কমিটি</h3>
+              <h3 className="headerTitleMain">কেন্দ্রীয় কমিটি</h3>
             </div>
             {/* Alumni Details */}
             <Container className="mt-4 mb-5">

@@ -1,9 +1,9 @@
-import Head from "next/head";
-import useFetch from "@/hooks/useFetch";
-import { Container, Row } from "react-bootstrap";
-import NoticeCard from "@/components/noticeCard/NoticeCard";
-import { TITLE } from "@/utils/api";
 import MemberSkeleton from "@/components/loader/MemberSkeleton";
+import NoticeCard from "@/components/noticeCard/NoticeCard";
+import useFetch from "@/hooks/useFetch";
+import { TITLE } from "@/utils/api";
+import Head from "next/head";
+import { Container, Row } from "react-bootstrap";
 
 export default function Notice() {
   const { data, loading } = useFetch("/notice");
@@ -22,7 +22,7 @@ export default function Notice() {
           <>
             {/* Notice Title */}
             <div className="headerTitle mt-3">
-              <h3 class="headerTitleMain">নোটিশ</h3>
+              <h3 className="headerTitleMain">নোটিশ</h3>
             </div>
             {/* Notice Details */}
             <Container className="mt-4">
