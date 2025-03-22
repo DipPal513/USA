@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import President from "@/components/home/president/President";
