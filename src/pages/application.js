@@ -1,3 +1,4 @@
+"use client";
 import Style from "@/styles/Application.module.css";
 import axios from "axios";
 import Head from "next/head";

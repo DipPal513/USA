@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import Footer from "@/components/footer/Footer";
 import HeaderTop from "@/components/header/headerTop/HeaderTop";
