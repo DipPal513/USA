@@ -16,7 +16,9 @@ export default function Application() {
   const [showLevel, setShowLevel] = useState({});
   // University State
   const [universityName, setUniversityName] = useState([]);
+  const [sessionName, setSessionName] = useState([]);
   const [selectUniversity, setSelectUniversity] = useState("");
+  const [selectSession, setSelectSession] = useState("");
   // Union State
   const [unionName, setUnionName] = useState([]);
   const [selectUnion, setSelectUnion] = useState("");
@@ -30,24 +32,25 @@ export default function Application() {
     formState: { errors },
   } = useForm();
 
-  // Admin Label
-  useEffect(() => {
-    axios.get(BASE_URL + "/admin_view").then((res) => {
-      setShowLevel(res.data.admin);
-    });
-  }, []);
-  console.log(showLevel)
+
+ 
 
   // Get All University Name
   useEffect(() => {
-    axios.get(BASE_URL + "/university_view").then((res) => {
+    axios.get("https://amaderthikana.com/api/usasreepur/university").then((res) => {
       setUniversityName(res.data.data);
+    });
+  }, []);
+  // Get All University Name
+  useEffect(() => {
+    axios.get("https://amaderthikana.com/api/usasreepur/session_category").then((res) => {
+      setSessionName(res.data.data);
     });
   }, []);
 
   // Get All Union Name
   useEffect(() => {
-    axios.get(BASE_URL + "/union_view").then((res) => {
+    axios.get("https://amaderthikana.com/api/usasreepur/batch_category").then((res) => {
       setUnionName(res.data.data);
     });
   }, []);
@@ -59,13 +62,16 @@ export default function Application() {
   const handleUniversityNameChange = (event) => {
     setSelectUniversity(event.target.value);
   };
+  const handleSessionNameChange = (event) => {
+    setSelectSession(event.target.value);
+  };
 
   const handleUnionNameChange = (event) => {
     setSelectUnion(event.target.value);
   };
 
   const onSubmit = async (data) => {
-     console.log(data)
+   
     try {
       setLoadingBtn(true);
       data.bloodGroup = bloodGroup;
@@ -74,23 +80,18 @@ export default function Application() {
 
       const formData = new FormData();
       formData.append("name", data.name);
+      formData.append("university_id", selectUniversity);
       formData.append("fb_link", data.fb_link);
-
-
+      formData.append("committeeunit_id", 78);
+      formData.append("category_id", 288);
       formData.append("phone", data.phone);
-      if(data.email){
-          formData.append("email", data.email);
-        }
-
-        
-      if(data.bloodGroup){
-        formData.append("blood", data.bloodGroup);
-      }
-      
+      formData.append("email", data.email);
+      formData.append("blood", data.bloodGroup);
+      formData.append("member_password", "Member264@");
 
       if (data.profile_image[0]) {
         const profile_image = data.profile_image[0];
-        formData.append("image", profile_image);
+        formData.append("profile_image", profile_image);
       }
 
       if (showLevel?.level_university) {
@@ -114,66 +115,34 @@ export default function Application() {
         formData.append("department", data.department);
       }
 
-      if (showLevel?.level_custom2) {
-        formData.append("custom2", data.custom2);
-      }
 
-      if (showLevel?.level_custom1) {
-        if(data.custom1){
-          formData.append("custom1", data.custom1);
-        }
-      }
+      formData.append("session_id", selectSession);
+      formData.append("occupation", data.occupation);
+      formData.append("about_self", data.about_self);
+      formData.append("organization", data.organization);
 
-      if (showLevel?.level_workplace) {
-        if(data.workplace){
-          formData.append("workplace", data.workplace);
-        }
-      }
 
-      if (showLevel?.level_current_address) {
-        if(data.current_address){
-          formData.append("current_address", data.current_address);
-        }
-      }
+      formData.append("batch_id", selectUnion);
 
-      if (showLevel?.level_union) {
-        if (!selectUnion) {
-          toast.error("Please Select Union");
-          setLoadingBtn(false);
-          return;
-        }
-        if (selectUnion === "নির্বাচন করুন" || selectUnion === "") {
-          toast.error("Please Select Union");
-          setLoadingBtn(false);
-          return;
-        }
-        formData.append("address_union", data.unionName);
-      }
+      formData.append("village", data.village);
 
-      if (showLevel?.level_permanent_address) {
-        if(data.permanent_address){
-          formData.append("permanent_address", data.permanent_address);
-        }
-      }
 
-      if (showLevel?.level_custom3) {
-        formData.append("custom3", data.custom3);
-      }
+      formData.append("affiliation", data.affiliation);
 
-      if (showLevel?.level_custom4) {
-        formData.append("custom4", data.custom4);
-      }
+
+
+      console.log("form data details: ", formData);
 
       const response = await axios({
         method: "post",
-        url: BASE_URL + "/application",
+        url: "https://amaderthikana.com/api/usasreepur/application_memebr",
         data: formData,
         headers: {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
         },
       });
       console.log("response, ", response);
-      if (response.status === 200) {
+      if (response.data.status === 200) {
         Swal.fire("Congratulations!", "Registration Successful.", "success");
         setErrorMessage({});
         toast.success("Registration Successful");
@@ -258,12 +227,12 @@ export default function Application() {
                           controlId="exampleForm.ControlInput1"
                         >
                           <Form.Label className={Style.inputLabel}>
-                            রক্তের গ্রুপ 
+                            রক্তের গ্রুপ
                           </Form.Label>
                           <Form.Select
                             value={bloodGroup}
                             onChange={handleBloodGroupChange}
-                            style={{fontSize: '14px'}}
+                            style={{ fontSize: '14px' }}
                             aria-label="Default select example"
                             className={`${Style.inputField} ${Style.formSelect}`}
                           >
@@ -311,7 +280,7 @@ export default function Application() {
                           controlId="exampleForm.ControlInput1"
                         >
                           <Form.Label className={Style.inputLabel}>
-                            E-mail
+                            E-mail<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             size="sm"
@@ -319,6 +288,7 @@ export default function Application() {
                             className={`${Style.inputField} input`}
                             {...register("email")}
                             placeholder="E-mail"
+                            required
                           />
                         </Form.Group>
                       </Col>
@@ -342,32 +312,32 @@ export default function Application() {
                       </Col>
 
                       {/* University */}
-                      {showLevel?.level_university && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            বিশ্ববিদ্যালয় <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            value={selectUniversity}
+                            onChange={handleUniversityNameChange}
+                            style={{ fontSize: '14px' }}
+                            aria-label="Default select example"
+                            className={`${Style.inputField} ${Style.formSelect}`}
                           >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_university} <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Select
-                              value={selectUniversity}
-                              onChange={handleUniversityNameChange}
-                              style={{fontSize: '14px'}}
-                              aria-label="Default select example"
-                              className={`${Style.inputField} ${Style.formSelect}`}
-                            >
-                              <option>নির্বাচন করুন</option>
-                              {universityName?.map((item) => (
-                                <option key={item.id} value={item?.dureg}>
-                                  {item?.dureg}
-                                </option>
-                              ))}
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                      )}
+                            <option>নির্বাচন করুন</option>
+                            {universityName?.map((item) => (
+                              <option key={item.id} value={item?.id}>
+                                {item?.university_name}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
 
                       {/* Department */}
                       {showLevel?.level_department && (
@@ -398,233 +368,203 @@ export default function Application() {
                       )}
 
                       {/* Custom2 */}
-                      {showLevel?.level_custom2 && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_custom2} <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("custom2", {
-                                required: true,
-                              })}
-                              placeholder={showLevel?.level_custom2}
-                            />
-                            {errors.custom2 && (
-                              <span className="text-danger">
-                                {showLevel?.level_custom2} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
 
-                      {/* Custom1 */}
-                      {showLevel?.level_custom1 && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            সেশন <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            value={selectSession}
+                            onChange={handleSessionNameChange}
+                            style={{ fontSize: '14px' }}
+                            aria-label="Default select example"
+                            className={`${Style.inputField} ${Style.formSelect}`}
                           >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_custom1}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("custom1")}
-                              placeholder={showLevel?.level_custom1}
-                            />
-                            {errors.custom1 && (
-                              <span className="text-danger">
-                                {showLevel?.level_custom1} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
+                            <option>নির্বাচন করুন</option>
+                            {sessionName?.map((item) => (
+                              <option key={item.id} value={item?.id}>
+                                {item?.session_name}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            পদবি ও কর্মস্থল
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("occupation")}
+                            placeholder={"পদবি ও কর্মস্থল"}
+                          />
+                          {errors.custom1 && (
+                            <span className="text-danger">
+                              {showLevel?.level_custom1} is required
+                            </span>
+                          )}
+                        </Form.Group>
+                      </Col>
+
 
                       {/* Workplace */}
-                      {showLevel?.level_workplace && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_workplace}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("workplace")}
-                              placeholder={showLevel?.level_workplace}
-                            />
-                            {errors.workplace && (
-                              <span className="text-danger">
-                                {showLevel?.level_workplace} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            শখ
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("about_self")}
+                            placeholder={"শখ "}
+                          />
+                          {errors.about_self && (
+                            <span className="text-danger">
+                              {showLevel?.about_self} is required
+                            </span>
+                          )}
+                        </Form.Group>
+                      </Col>
+
 
                       {/* Current Address */}
-                      {showLevel?.level_current_address && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_current_address}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("current_address")}
-                              placeholder={showLevel?.level_current_address}
-                            />
-                            {errors.current_address && (
-                              <span className="text-danger">
-                                {showLevel?.level_current_address} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
 
-                      {/* Union */}
-                      {showLevel?.level_union && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_union} <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Select
-                              value={selectUnion}
-                              onChange={handleUnionNameChange}
-                              style={{fontSize: '14px'}}
-                              aria-label="Default select example"
-                              className={`${Style.inputField} ${Style.formSelect}`}
-                            >
-                              <option>নির্বাচন করুন</option>
-                              {unionName?.map((item) => (
-                                <option key={item.id} value={item?.id}>
-                                  {item?.dureg}
-                                </option>
-                              ))}
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                      )}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            হলের নাম
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("organization")}
+                            placeholder={"হলের নাম"}
+                          />
+                          {errors.organization && (
+                            <span className="text-danger">
+                              {showLevel?.organization} is required
+                            </span>
+                          )}
+                        </Form.Group>
+                      </Col>
 
-                      {/* Permanent Address */}
-                      {showLevel?.level_permanent_address && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
+
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            ইউনিয়ন/পৌরসভা <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            value={selectUnion}
+                            onChange={handleUnionNameChange}
+                            style={{ fontSize: '14px' }}
+                            aria-label="Default select example"
+                            className={`${Style.inputField} ${Style.formSelect}`}
                           >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_permanent_address}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("permanent_address")}
-                              placeholder={showLevel?.level_permanent_address}
-                            />
-                          </Form.Group>
-                        </Col>
-                      )}
+                            <option>নির্বাচন করুন</option>
+                            {unionName?.map((item) => (
+                              <option key={item.id} value={item?.id}>
+                                {item?.batch_name}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+
+
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            গ্রামের নাম
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("village")}
+                            placeholder={"গ্রামের নাম"}
+                          />
+                        </Form.Group>
+                      </Col>
+
 
 
                       {/* facebook link  */}
                       <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              ফেসবুক লিংক
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            ফেসবুক লিংক
 
-                              {/* {showLevel?.level_permanent_address} */}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("fb_link")}
-                              placeholder={"ফেসবুক লিংক দিন "}
-                            />
-                          </Form.Group>
-                        </Col>
+                            {/* {showLevel?.level_permanent_address} */}
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("fb_link")}
+                            placeholder={"ফেসবুক লিংক দিন "}
+                          />
+                        </Form.Group>
+                      </Col>
 
-                      {/* Custom3 */}
-                      {showLevel?.level_custom3 && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_custom3}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("custom3")}
-                              placeholder={showLevel?.level_custom3}
-                            />
-                            {errors.custom3 && (
-                              <span className="text-danger">
-                                {showLevel?.level_custom3} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
 
-                      {/* Custom4 */}
-                      {showLevel?.level_custom4 && (
-                        <Col lg={6} md={6} sm={12}>
-                          <Form.Group
-                            className={`${Style.contact} mb-3`}
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label className={Style.inputLabel}>
-                              {showLevel?.level_custom4}
-                            </Form.Label>
-                            <Form.Control
-                              size="sm"
-                              type="text"
-                              className={`${Style.inputField} input`}
-                              {...register("custom4")}
-                              placeholder={showLevel?.level_custom4}
-                            />
-                            {errors.custom4 && (
-                              <span className="text-danger">
-                                {showLevel?.level_custom4} is required
-                              </span>
-                            )}
-                          </Form.Group>
-                        </Col>
-                      )}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className={`${Style.contact} mb-3`}
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label className={Style.inputLabel}>
+                            ঊষা কার্যনির্বাহী কমিটি/শাখা কমিটিতে পদবি (যদি থাকে)
+                          </Form.Label>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            className={`${Style.inputField} input`}
+                            {...register("affiliation")}
+                            placeholder={"ঊষা কার্যনির্বাহী কমিটি/শাখা কমিটিতে পদবি (যদি থাকে)"}
+                          />
+                          {errors.affiliation && (
+                            <span className="text-danger">
+                              {showLevel?.affiliation} is required
+                            </span>
+                          )}
+                        </Form.Group>
+                      </Col>
+
                     </Row>
 
                     {errorMessage && (
